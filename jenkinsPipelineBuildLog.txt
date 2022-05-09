@@ -1,0 +1,230 @@
+Started by user rico
+Obtained Jenkinsfile from git https://github.com/Pobre/inf335_atividade_5.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/atividade_5_pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/atividade_5_pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Pobre/inf335_atividade_5.git # timeout=10
+Fetching upstream changes from https://github.com/Pobre/inf335_atividade_5.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.36.0'
+ > git fetch --tags --force --progress -- https://github.com/Pobre/inf335_atividade_5.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 7f88be4205f5d6ad674da1dd055f9dea66643f62 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7f88be4205f5d6ad674da1dd055f9dea66643f62 # timeout=10
+Commit message: "Faz package apenas em sucesso de testes"
+ > git rev-list --no-walk 778d49e98991382ee7a027726794030191e1cd3c # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ mvn -Dmaven.test.failure.ignore=true clean
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< br.unicamp.ic.inf335:at4 >----------------------
+[INFO] Building at4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ at4 ---
+[INFO] Deleting /var/lib/jenkins/workspace/atividade_5_pipeline/target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.246 s
+[INFO] Finished at: 2022-05-09T20:00:24-03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] sh
++ mvn compile
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< br.unicamp.ic.inf335:at4 >----------------------
+[INFO] Building at4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ at4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/atividade_5_pipeline/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ at4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /var/lib/jenkins/workspace/atividade_5_pipeline/target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.668 s
+[INFO] Finished at: 2022-05-09T20:00:26-03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] sh
++ mvn test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< br.unicamp.ic.inf335:at4 >----------------------
+[INFO] Building at4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ at4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/atividade_5_pipeline/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ at4 ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:testResources (default-testResources) @ at4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/atividade_5_pipeline/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ at4 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /var/lib/jenkins/workspace/atividade_5_pipeline/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ at4 ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running br.unicamp.ic.inf335.beans.AnuncioBeanTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s - in br.unicamp.ic.inf335.beans.AnuncioBeanTest
+[INFO] Running br.unicamp.ic.inf335.beans.ProdutoBeanTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in br.unicamp.ic.inf335.beans.ProdutoBeanTest
+[INFO] Running br.unicamp.ic.inf335.beans.AnuncianteBeanTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in br.unicamp.ic.inf335.beans.AnuncianteBeanTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.632 s
+[INFO] Finished at: 2022-05-09T20:00:29-03:00
+[INFO] ------------------------------------------------------------------------
+Post stage
+[Pipeline] sh
++ mvn package
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< br.unicamp.ic.inf335:at4 >----------------------
+[INFO] Building at4 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.0.2/maven-jar-plugin-3.0.2.pom
+Progress (1): 2.7/6.2 kBProgress (1): 5.5/6.2 kBProgress (1): 6.2 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.0.2/maven-jar-plugin-3.0.2.pom (6.2 kB at 7.0 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.0.2/maven-jar-plugin-3.0.2.jar
+Progress (1): 2.7/27 kBProgress (1): 5.5/27 kBProgress (1): 8.2/27 kBProgress (1): 11/27 kB Progress (1): 14/27 kBProgress (1): 16/27 kBProgress (1): 19/27 kBProgress (1): 21/27 kBProgress (1): 24/27 kBProgress (1): 27/27 kBProgress (1): 27 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.0.2/maven-jar-plugin-3.0.2.jar (27 kB at 82 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ at4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/atividade_5_pipeline/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ at4 ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:testResources (default-testResources) @ at4 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/atividade_5_pipeline/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ at4 ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.1:test (default-test) @ at4 ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running br.unicamp.ic.inf335.beans.AnuncioBeanTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 s - in br.unicamp.ic.inf335.beans.AnuncioBeanTest
+[INFO] Running br.unicamp.ic.inf335.beans.ProdutoBeanTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in br.unicamp.ic.inf335.beans.ProdutoBeanTest
+[INFO] Running br.unicamp.ic.inf335.beans.AnuncianteBeanTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in br.unicamp.ic.inf335.beans.AnuncianteBeanTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ at4 ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.1.1/maven-archiver-3.1.1.pom
+Progress (1): 2.7/4.3 kBProgress (1): 4.3 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.1.1/maven-archiver-3.1.1.pom (4.3 kB at 15 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.pom
+Progress (1): 2.7/4.6 kBProgress (1): 4.6 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.pom (4.6 kB at 16 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.3/plexus-archiver-3.3.pom
+Progress (1): 2.7/5.3 kBProgress (1): 5.3 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.3/plexus-archiver-3.3.pom (5.3 kB at 19 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/3.2/plexus-3.2.pom
+Progress (1): 4.1/19 kBProgress (1): 8.2/19 kBProgress (1): 12/19 kB Progress (1): 16/19 kBProgress (1): 19 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/3.2/plexus-3.2.pom (19 kB at 63 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.7.1/plexus-io-2.7.1.pom
+Progress (1): 4.1/4.9 kBProgress (1): 4.9 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.7.1/plexus-io-2.7.1.pom (4.9 kB at 18 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.2/commons-io-2.2.pom
+Progress (1): 4.1/11 kBProgress (1): 8.2/11 kBProgress (1): 11 kB                       Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.2/commons-io-2.2.pom (11 kB at 38 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/24/commons-parent-24.pom
+Progress (1): 4.1/47 kBProgress (1): 8.2/47 kBProgress (1): 12/47 kB Progress (1): 16/47 kBProgress (1): 20/47 kBProgress (1): 24/47 kBProgress (1): 28/47 kBProgress (1): 32/47 kBProgress (1): 36/47 kBProgress (1): 40/47 kBProgress (1): 45/47 kBProgress (1): 47 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/24/commons-parent-24.pom (47 kB at 132 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.11/commons-compress-1.11.pom
+Progress (1): 4.1/13 kBProgress (1): 8.2/13 kBProgress (1): 12/13 kB Progress (1): 13 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.11/commons-compress-1.11.pom (13 kB at 41 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.pom
+Progress (1): 4.1/15 kBProgress (1): 8.2/15 kBProgress (1): 12/15 kB Progress (1): 15 kB                      Downloaded from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.pom (15 kB at 50 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.5/xz-1.5.pom
+Progress (1): 1.9 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.5/xz-1.5.pom (1.9 kB at 6.8 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.4/plexus-archiver-3.4.pom
+Progress (1): 4.1/5.3 kBProgress (1): 5.3 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.4/plexus-archiver-3.4.pom (5.3 kB at 19 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.1.1/maven-archiver-3.1.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.4/plexus-archiver-3.4.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.11/commons-compress-1.11.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.7.1/plexus-io-2.7.1.jar
+Progress (1): 4.1/154 kBProgress (1): 8.2/154 kBProgress (1): 12/154 kB Progress (1): 16/154 kBProgress (1): 20/154 kBProgress (1): 24/154 kBProgress (1): 28/154 kBProgress (1): 32/154 kBProgress (1): 36/154 kBProgress (1): 40/154 kBProgress (1): 45/154 kBProgress (1): 49/154 kBProgress (1): 53/154 kBProgress (1): 57/154 kBProgress (1): 61/154 kBProgress (1): 65/154 kBProgress (1): 69/154 kBProgress (1): 73/154 kBProgress (1): 77/154 kBProgress (1): 81/154 kBProgress (1): 85/154 kBProgress (1): 90/154 kBProgress (1): 94/154 kBProgress (1): 98/154 kBProgress (1): 102/154 kBProgress (1): 106/154 kBProgress (1): 110/154 kBProgress (1): 114/154 kBProgress (1): 118/154 kBProgress (1): 122/154 kBProgress (1): 126/154 kBProgress (1): 131/154 kBProgress (1): 135/154 kBProgress (1): 139/154 kBProgress (1): 143/154 kBProgress (1): 147/154 kBProgress (1): 151/154 kBProgress (1): 154 kB    Progress (2): 154 kB | 2.7/187 kBProgress (2): 154 kB | 5.5/187 kBProgress (2): 154 kB | 8.2/187 kBProgress (2): 154 kB | 11/187 kB Progress (2): 154 kB | 14/187 kBProgress (2): 154 kB | 16/187 kBProgress (3): 154 kB | 16/187 kB | 2.7/24 kBProgress (3): 154 kB | 16/187 kB | 5.5/24 kBProgress (3): 154 kB | 16/187 kB | 8.2/24 kBProgress (3): 154 kB | 16/187 kB | 11/24 kB Progress (3): 154 kB | 19/187 kB | 11/24 kBProgress (3): 154 kB | 19/187 kB | 14/24 kBProgress (3): 154 kB | 19/187 kB | 16/24 kBProgress (3): 154 kB | 21/187 kB | 16/24 kBProgress (3): 154 kB | 21/187 kB | 19/24 kBProgress (4): 154 kB | 21/187 kB | 19/24 kB | 2.7/426 kBProgress (4): 154 kB | 21/187 kB | 19/24 kB | 5.5/426 kBProgress (4): 154 kB | 21/187 kB | 19/24 kB | 8.2/426 kBProgress (4): 154 kB | 21/187 kB | 19/24 kB | 11/426 kB Progress (4): 154 kB | 24/187 kB | 19/24 kB | 11/426 kBProgress (4): 154 kB | 24/187 kB | 19/24 kB | 14/426 kBProgress (4): 154 kB | 24/187 kB | 19/24 kB | 16/426 kBProgress (4): 154 kB | 24/187 kB | 21/24 kB | 16/426 kBProgress (5): 154 kB | 24/187 kB | 21/24 kB | 16/426 kB | 2.7/86 kBProgress (5): 154 kB | 24/187 kB | 21/24 kB | 16/426 kB | 5.5/86 kBProgress (5): 154 kB | 24/187 kB | 21/24 kB | 16/426 kB | 8.2/86 kBProgress (5): 154 kB | 27/187 kB | 21/24 kB | 16/426 kB | 8.2/86 kBProgress (5): 154 kB | 27/187 kB | 21/24 kB | 16/426 kB | 11/86 kB Progress (5): 154 kB | 27/187 kB | 21/24 kB | 19/426 kB | 11/86 kBProgress (5): 154 kB | 27/187 kB | 24 kB | 19/426 kB | 11/86 kB   Progress (5): 154 kB | 27/187 kB | 24 kB | 19/426 kB | 14/86 kBProgress (5): 154 kB | 30/187 kB | 24 kB | 19/426 kB | 14/86 kBProgress (5): 154 kB | 30/187 kB | 24 kB | 19/426 kB | 16/86 kBProgress (5): 154 kB | 30/187 kB | 24 kB | 21/426 kB | 16/86 kBProgress (5): 154 kB | 30/187 kB | 24 kB | 21/426 kB | 19/86 kBProgress (5): 154 kB | 32/187 kB | 24 kB | 21/426 kB | 19/86 kBProgress (5): 154 kB | 32/187 kB | 24 kB | 24/426 kB | 19/86 kBProgress (5): 154 kB | 32/187 kB | 24 kB | 24/426 kB | 21/86 kBProgress (5): 154 kB | 35/187 kB | 24 kB | 24/426 kB | 21/86 kBProgress (5): 154 kB | 35/187 kB | 24 kB | 27/426 kB | 21/86 kBProgress (5): 154 kB | 35/187 kB | 24 kB | 27/426 kB | 24/86 kBProgress (5): 154 kB | 38/187 kB | 24 kB | 27/426 kB | 24/86 kBProgress (5): 154 kB | 38/187 kB | 24 kB | 30/426 kB | 24/86 kBProgress (5): 154 kB | 38/187 kB | 24 kB | 30/426 kB | 27/86 kBProgress (5): 154 kB | 40/187 kB | 24 kB | 30/426 kB | 27/86 kB                                                               Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/3.0.1/maven-shared-utils-3.0.1.jar (154 kB at 323 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.jar
+Progress (4): 40/187 kB | 24 kB | 32/426 kB | 27/86 kBProgress (4): 40/187 kB | 24 kB | 32/426 kB | 30/86 kBProgress (4): 40/187 kB | 24 kB | 35/426 kB | 30/86 kBProgress (4): 40/187 kB | 24 kB | 35/426 kB | 32/86 kBProgress (4): 40/187 kB | 24 kB | 38/426 kB | 32/86 kBProgress (4): 40/187 kB | 24 kB | 38/426 kB | 35/86 kBProgress (4): 40/187 kB | 24 kB | 40/426 kB | 35/86 kBProgress (4): 40/187 kB | 24 kB | 40/426 kB | 38/86 kBProgress (4): 40/187 kB | 24 kB | 40/426 kB | 40/86 kBProgress (4): 43/187 kB | 24 kB | 40/426 kB | 40/86 kBProgress (4): 46/187 kB | 24 kB | 40/426 kB | 40/86 kBProgress (4): 49/187 kB | 24 kB | 40/426 kB | 40/86 kBProgress (4): 49/187 kB | 24 kB | 43/426 kB | 40/86 kBProgress (4): 49/187 kB | 24 kB | 46/426 kB | 40/86 kBProgress (4): 49/187 kB | 24 kB | 49/426 kB | 40/86 kBProgress (4): 53/187 kB | 24 kB | 49/426 kB | 40/86 kBProgress (4): 57/187 kB | 24 kB | 49/426 kB | 40/86 kBProgress (4): 61/187 kB | 24 kB | 49/426 kB | 40/86 kBProgress (4): 65/187 kB | 24 kB | 49/426 kB | 40/86 kBProgress (4): 65/187 kB | 24 kB | 49/426 kB | 43/86 kBProgress (4): 65/187 kB | 24 kB | 49/426 kB | 46/86 kB                                                      Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-archiver/3.1.1/maven-archiver-3.1.1.jar (24 kB at 39 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.5/xz-1.5.jar
+Progress (3): 65/187 kB | 49/426 kB | 49/86 kBProgress (3): 69/187 kB | 49/426 kB | 49/86 kBProgress (3): 73/187 kB | 49/426 kB | 49/86 kBProgress (3): 77/187 kB | 49/426 kB | 49/86 kBProgress (3): 81/187 kB | 49/426 kB | 49/86 kBProgress (3): 81/187 kB | 53/426 kB | 49/86 kBProgress (3): 81/187 kB | 57/426 kB | 49/86 kBProgress (3): 81/187 kB | 61/426 kB | 49/86 kBProgress (3): 81/187 kB | 65/426 kB | 49/86 kBProgress (3): 85/187 kB | 65/426 kB | 49/86 kBProgress (3): 90/187 kB | 65/426 kB | 49/86 kBProgress (3): 94/187 kB | 65/426 kB | 49/86 kBProgress (3): 98/187 kB | 65/426 kB | 49/86 kBProgress (4): 98/187 kB | 65/426 kB | 49/86 kB | 4.1/58 kBProgress (4): 98/187 kB | 65/426 kB | 49/86 kB | 8.2/58 kBProgress (4): 98/187 kB | 65/426 kB | 49/86 kB | 12/58 kB Progress (4): 98/187 kB | 65/426 kB | 49/86 kB | 16/58 kBProgress (4): 98/187 kB | 65/426 kB | 53/86 kB | 16/58 kBProgress (4): 98/187 kB | 65/426 kB | 57/86 kB | 16/58 kBProgress (4): 98/187 kB | 65/426 kB | 61/86 kB | 16/58 kBProgress (4): 98/187 kB | 65/426 kB | 65/86 kB | 16/58 kBProgress (4): 98/187 kB | 65/426 kB | 65/86 kB | 20/58 kBProgress (4): 98/187 kB | 65/426 kB | 65/86 kB | 24/58 kBProgress (4): 98/187 kB | 65/426 kB | 65/86 kB | 28/58 kBProgress (4): 98/187 kB | 65/426 kB | 65/86 kB | 32/58 kBProgress (4): 98/187 kB | 69/426 kB | 65/86 kB | 32/58 kBProgress (4): 98/187 kB | 73/426 kB | 65/86 kB | 32/58 kBProgress (4): 98/187 kB | 77/426 kB | 65/86 kB | 32/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 32/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 36/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 40/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 45/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 49/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 53/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 57/58 kBProgress (4): 98/187 kB | 81/426 kB | 65/86 kB | 58 kB   Progress (4): 98/187 kB | 81/426 kB | 69/86 kB | 58 kBProgress (4): 98/187 kB | 81/426 kB | 73/86 kB | 58 kBProgress (4): 98/187 kB | 81/426 kB | 77/86 kB | 58 kBProgress (4): 98/187 kB | 81/426 kB | 81/86 kB | 58 kBProgress (4): 98/187 kB | 85/426 kB | 81/86 kB | 58 kBProgress (4): 98/187 kB | 90/426 kB | 81/86 kB | 58 kBProgress (4): 98/187 kB | 94/426 kB | 81/86 kB | 58 kBProgress (4): 98/187 kB | 98/426 kB | 81/86 kB | 58 kBProgress (4): 98/187 kB | 98/426 kB | 85/86 kB | 58 kBProgress (4): 98/187 kB | 98/426 kB | 86 kB | 58 kB   Progress (4): 102/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 106/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 110/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 114/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 118/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 122/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 126/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 131/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 135/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 139/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 143/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 147/187 kB | 98/426 kB | 86 kB | 58 kBProgress (4): 147/187 kB | 102/426 kB | 86 kB | 58 kBProgress (4): 147/187 kB | 106/426 kB | 86 kB | 58 kBProgress (4): 147/187 kB | 110/426 kB | 86 kB | 58 kBProgress (4): 147/187 kB | 114/426 kB | 86 kB | 58 kBProgress (4): 151/187 kB | 114/426 kB | 86 kB | 58 kBProgress (4): 155/187 kB | 114/426 kB | 86 kB | 58 kBProgress (4): 159/187 kB | 114/426 kB | 86 kB | 58 kBProgress (4): 163/187 kB | 114/426 kB | 86 kB | 58 kBProgress (4): 163/187 kB | 118/426 kB | 86 kB | 58 kBProgress (4): 163/187 kB | 122/426 kB | 86 kB | 58 kBProgress (4): 163/187 kB | 126/426 kB | 86 kB | 58 kBProgress (4): 163/187 kB | 131/426 kB | 86 kB | 58 kBProgress (5): 163/187 kB | 131/426 kB | 86 kB | 58 kB | 2.7/100 kBProgress (5): 167/187 kB | 131/426 kB | 86 kB | 58 kB | 2.7/100 kBProgress (5): 171/187 kB | 131/426 kB | 86 kB | 58 kB | 2.7/100 kBProgress (5): 176/187 kB | 131/426 kB | 86 kB | 58 kB | 2.7/100 kBProgress (5): 180/187 kB | 131/426 kB | 86 kB | 58 kB | 2.7/100 kBProgress (5): 180/187 kB | 131/426 kB | 86 kB | 58 kB | 5.5/100 kBProgress (5): 184/187 kB | 131/426 kB | 86 kB | 58 kB | 5.5/100 kBProgress (5): 187 kB | 131/426 kB | 86 kB | 58 kB | 5.5/100 kB    Progress (5): 187 kB | 131/426 kB | 86 kB | 58 kB | 8.2/100 kBProgress (5): 187 kB | 135/426 kB | 86 kB | 58 kB | 8.2/100 kBProgress (5): 187 kB | 139/426 kB | 86 kB | 58 kB | 8.2/100 kBProgress (5): 187 kB | 143/426 kB | 86 kB | 58 kB | 8.2/100 kBProgress (5): 187 kB | 147/426 kB | 86 kB | 58 kB | 8.2/100 kBProgress (5): 187 kB | 147/426 kB | 86 kB | 58 kB | 11/100 kB Progress (5): 187 kB | 147/426 kB | 86 kB | 58 kB | 14/100 kBProgress (5): 187 kB | 147/426 kB | 86 kB | 58 kB | 16/100 kBProgress (5): 187 kB | 147/426 kB | 86 kB | 58 kB | 19/100 kBProgress (5): 187 kB | 151/426 kB | 86 kB | 58 kB | 19/100 kBProgress (5): 187 kB | 155/426 kB | 86 kB | 58 kB | 19/100 kBProgress (5): 187 kB | 159/426 kB | 86 kB | 58 kB | 19/100 kBProgress (5): 187 kB | 163/426 kB | 86 kB | 58 kB | 19/100 kBProgress (5): 187 kB | 163/426 kB | 86 kB | 58 kB | 21/100 kBProgress (5): 187 kB | 163/426 kB | 86 kB | 58 kB | 24/100 kB                                                             Downloaded from central: https://repo.maven.apache.org/maven2/org/iq80/snappy/snappy/0.4/snappy-0.4.jar (58 kB at 75 kB/s)
+Progress (4): 187 kB | 163/426 kB | 86 kB | 27/100 kBProgress (4): 187 kB | 167/426 kB | 86 kB | 27/100 kBProgress (4): 187 kB | 171/426 kB | 86 kB | 27/100 kBProgress (4): 187 kB | 176/426 kB | 86 kB | 27/100 kBProgress (4): 187 kB | 180/426 kB | 86 kB | 27/100 kBProgress (4): 187 kB | 180/426 kB | 86 kB | 30/100 kBProgress (4): 187 kB | 180/426 kB | 86 kB | 32/100 kBProgress (4): 187 kB | 184/426 kB | 86 kB | 32/100 kBProgress (4): 187 kB | 188/426 kB | 86 kB | 32/100 kBProgress (4): 187 kB | 192/426 kB | 86 kB | 32/100 kBProgress (4): 187 kB | 196/426 kB | 86 kB | 32/100 kB                                                     Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.7.1/plexus-io-2.7.1.jar (86 kB at 108 kB/s)
+Progress (3): 187 kB | 200/426 kB | 32/100 kBProgress (3): 187 kB | 204/426 kB | 32/100 kBProgress (3): 187 kB | 208/426 kB | 32/100 kBProgress (3): 187 kB | 212/426 kB | 32/100 kBProgress (3): 187 kB | 217/426 kB | 32/100 kBProgress (3): 187 kB | 221/426 kB | 32/100 kBProgress (3): 187 kB | 225/426 kB | 32/100 kBProgress (3): 187 kB | 229/426 kB | 32/100 kBProgress (3): 187 kB | 229/426 kB | 36/100 kBProgress (3): 187 kB | 229/426 kB | 40/100 kBProgress (3): 187 kB | 229/426 kB | 45/100 kBProgress (3): 187 kB | 229/426 kB | 49/100 kBProgress (3): 187 kB | 233/426 kB | 49/100 kBProgress (3): 187 kB | 237/426 kB | 49/100 kBProgress (3): 187 kB | 241/426 kB | 49/100 kBProgress (3): 187 kB | 245/426 kB | 49/100 kBProgress (3): 187 kB | 249/426 kB | 49/100 kBProgress (3): 187 kB | 253/426 kB | 49/100 kBProgress (3): 187 kB | 258/426 kB | 49/100 kBProgress (3): 187 kB | 262/426 kB | 49/100 kBProgress (3): 187 kB | 266/426 kB | 49/100 kBProgress (3): 187 kB | 270/426 kB | 49/100 kBProgress (3): 187 kB | 274/426 kB | 49/100 kBProgress (3): 187 kB | 278/426 kB | 49/100 kB                                             Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/3.4/plexus-archiver-3.4.jar (187 kB at 211 kB/s)
+Progress (2): 282/426 kB | 49/100 kBProgress (2): 286/426 kB | 49/100 kBProgress (2): 290/426 kB | 49/100 kBProgress (2): 294/426 kB | 49/100 kBProgress (2): 294/426 kB | 53/100 kBProgress (2): 294/426 kB | 57/100 kBProgress (2): 294/426 kB | 61/100 kBProgress (2): 294/426 kB | 65/100 kBProgress (2): 298/426 kB | 65/100 kBProgress (2): 303/426 kB | 65/100 kBProgress (2): 307/426 kB | 65/100 kBProgress (2): 311/426 kB | 65/100 kBProgress (2): 315/426 kB | 65/100 kBProgress (2): 319/426 kB | 65/100 kBProgress (2): 323/426 kB | 65/100 kBProgress (2): 327/426 kB | 65/100 kBProgress (2): 331/426 kB | 65/100 kBProgress (2): 335/426 kB | 65/100 kBProgress (2): 339/426 kB | 65/100 kBProgress (2): 343/426 kB | 65/100 kBProgress (2): 343/426 kB | 69/100 kBProgress (2): 343/426 kB | 73/100 kBProgress (2): 343/426 kB | 77/100 kBProgress (2): 343/426 kB | 81/100 kBProgress (2): 348/426 kB | 81/100 kBProgress (2): 352/426 kB | 81/100 kBProgress (2): 356/426 kB | 81/100 kBProgress (2): 360/426 kB | 81/100 kBProgress (2): 364/426 kB | 81/100 kBProgress (2): 368/426 kB | 81/100 kBProgress (2): 372/426 kB | 81/100 kBProgress (2): 376/426 kB | 81/100 kBProgress (2): 376/426 kB | 85/100 kBProgress (2): 376/426 kB | 90/100 kBProgress (2): 376/426 kB | 94/100 kBProgress (2): 376/426 kB | 98/100 kBProgress (2): 380/426 kB | 98/100 kBProgress (2): 384/426 kB | 98/100 kBProgress (2): 389/426 kB | 98/100 kBProgress (2): 393/426 kB | 98/100 kBProgress (2): 393/426 kB | 100 kB   Progress (2): 397/426 kB | 100 kBProgress (2): 401/426 kB | 100 kBProgress (2): 405/426 kB | 100 kBProgress (2): 409/426 kB | 100 kBProgress (2): 413/426 kB | 100 kBProgress (2): 417/426 kB | 100 kBProgress (2): 421/426 kB | 100 kBProgress (2): 425/426 kB | 100 kBProgress (2): 426 kB | 100 kB                                 Downloaded from central: https://repo.maven.apache.org/maven2/org/tukaani/xz/1.5/xz-1.5.jar (100 kB at 93 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.11/commons-compress-1.11.jar (426 kB at 394 kB/s)
+[INFO] Building jar: /var/lib/jenkins/workspace/atividade_5_pipeline/target/at4-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.058 s
+[INFO] Finished at: 2022-05-09T20:00:37-03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] junit
+Recording test results
+[Checks API] No suitable checks publisher found.
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
