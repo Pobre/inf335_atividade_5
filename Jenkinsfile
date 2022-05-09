@@ -12,6 +12,7 @@ pipeline {
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean"
 		sh "mvn compile"
+		sh "mvn test"
             }
 
             post {
